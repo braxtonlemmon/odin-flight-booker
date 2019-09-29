@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start: 1
+  finish: 1
+  date: 2019-09-29 14:46:33
+  duration: 1.5
+
+two:
+  start: 1
+  finish: 1
+  date: 2019-09-29 14:46:33
+  duration: 1.5
