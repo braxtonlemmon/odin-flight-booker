@@ -1,0 +1,10 @@
+<div class="booking_page">
+  From: <%= @from.code %><br>
+	To:   <%= @to.code %><br>
+	Date: <%= @flight.date_formatted %><br>
+	Passengers:<br><br>
+	<% @booking.passengers.each_with_index do |passenger, i| %>
+	  Passenger <%= i+1 %>:<br>
+		Name:  <%= passenger.name %><br>
+		Email: <%= passenger.email %><br>
+	<% end %>
