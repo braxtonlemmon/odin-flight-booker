@@ -1,0 +1,5 @@
+<div class="results">
+	From: <%= Airport.where('id = ?', params[:search][:from_code]).first.code %><br>
+	To:   <%= Airport.where('id = ?', params[:search][:to_code]).first.code %><br>
+	Passengers: <%= params[:search][:passengers] %><br>
+</div>

@@ -1,0 +1,21 @@
+<div class="results">
+  Date:       <%= @flight.date_formatted %><br>
+	From:       <%= Airport.where('id = ?', @flight.from_airport_id).first.code %><br>
+	To:         <%= Airport.where('id = ?', @flight.to_airport_id).first.code %><br>
+	Passengers: <%= params[:select_flight][:passengers] %><br><br>
+</div>
+
+<%= form_with model: @booking do |f| %>
+
+		<%= f.fields_for :passengers do |passenger_form| %>
+			Passenger<br>
+			<%= passenger_form.label :name %>
+			<%= passenger_form.text_field :name, placeholder: 'Name' %><br>
+
+			<%= passenger_form.label :email %>
+			<%= passenger_form.text_field :email, placeholder: 'Email' %><br>
+		<% end %>
+
+	<%= f.hidden_field :flight_id, value: @flight.id %>
+	<%= f.submit 'Submit' %>
+<% end %>

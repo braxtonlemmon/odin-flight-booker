@@ -1,0 +1,13 @@
+<%= form_for 'search', url: '/flights', method: :get do |f| %>
+  <%= f.label :from_code, 'From' %>
+	<%= f.select :from_code, options_from_collection_for_select(
+											Airport.all, :id, :code) %><br>
+	<%= f.label :to_code, 'To' %>
+  <%= f.select :to_code,   options_from_collection_for_select(
+											Airport.all, :id, :code) %><br>
+	<%= f.label :passengers %>
+	<%= f.select :passengers, [1, 2, 3, 4] %><br>
+
+	<%= f.submit 'Search' %><br>
+<% end %>
+<%= render 'select_flight' unless params[:search].nil? %>

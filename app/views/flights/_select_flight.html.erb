@@ -1,0 +1,16 @@
+<div class="results">
+	From: <%= Airport.where('id = ?', params[:search][:from_code]).first.code %><br>
+	To:   <%= Airport.where('id = ?', params[:search][:to_code]).first.code %><br>
+	Passengers: <%= params[:search][:passengers] %><br>
+</div>
+
+<%= form_for :select_flight, url: new_booking_path, method: :get do |f| %>
+  <%= announce_flight_results %><br>
+	<% @flights.each do |flight| %>
+	  <%= f.label :flight_id, flight.date_formatted %>
+		<%= radio_button(:select_flight, :flight_id, flight.id) %><br>
+	<% end %>
+	<%= f.hidden_field :passengers, value: params[:search][:passengers] %>
+	<%= f.submit "Select flight" %>
+<% end %>
+
