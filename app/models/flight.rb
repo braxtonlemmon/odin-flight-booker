@@ -4,6 +4,10 @@ class Flight < ApplicationRecord
 	has_many :bookings
 	has_many :passengers, through: :bookings
 
+	validates :from_airport_id, presence: true
+	validates :to_airport_id,   presence: true
+	validates :date,            presence: true
+	
 	def date_formatted
 		date.strftime("%m/%d/%Y")
 	end 
