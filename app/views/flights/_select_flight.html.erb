@@ -2,13 +2,16 @@
 	From: <%= Airport.where('id = ?', params[:search][:from_code]).first.code %><br>
 	To:   <%= Airport.where('id = ?', params[:search][:to_code]).first.code %><br>
 	Passengers: <%= params[:search][:passengers] %><br>
+	Duration: <%= distance_of_time_in_words(@flights.first.duration) %>
 </div>
 
 <%= form_for :booking, url: new_booking_path, method: :get do |f| %>
-  <%= announce_flight_results %><br>
-	<% @flights.each do |flight| %>
-	  <%= f.label :flight_id, flight.date_formatted %>
-		<%= radio_button(:booking, :flight_id, flight.id) %><br>
+  <%= announce_flight_results %><br><br>
+	<% @flights.each_with_index do |flight, i| %>
+		<%= radio_button(:booking, :flight_id, flight.id) %>
+		Flight <%= i+1 %><br>
+		Departure: <%= flight.departure_time %><br>
+		Arrival:   <%= flight.arrival_time %><br><br>
 	<% end %>
 	<%= f.hidden_field :passengers, value: params[:search][:passengers] %>
 	<%= f.submit "Select flight" %>

@@ -11,5 +11,4 @@ module FlightsHelper
 			pluralize(@flights.count, 'flight') + " found. Select one."
 		end
 	end
-
 end

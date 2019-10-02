@@ -11,4 +11,13 @@ class Flight < ApplicationRecord
 	def date_formatted
 		date.strftime("%m/%d/%Y")
 	end 
+
+	def departure_time
+		date.in_time_zone(from_airport.time_zone).strftime("%b %e, %Y at %H:%M")
+	end
+
+	def arrival_time
+		arrival = date.in_time_zone(to_airport.time_zone) + duration
+		arrival.strftime("%b %e, %Y at %H:%M")
+	end
 end
