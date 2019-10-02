@@ -1,20 +1,21 @@
 <div class="results">
+	<%= @flight.date %>
   Date:       <%= @flight.date_formatted %><br>
 	From:       <%= Airport.where('id = ?', @flight.from_airport_id).first.code %><br>
 	To:         <%= Airport.where('id = ?', @flight.to_airport_id).first.code %><br>
-	Passengers: <%= params[:select_flight][:passengers] %><br><br>
+	Passengers: <%= params[:booking][:passengers] %><br><br>
 </div>
 
-<%= form_with model: @booking do |f| %>
+<%= form_with model: @booking, url: bookings_path, local: true do |f| %>
+	<%= f.fields_for :passengers do |passenger_form| %>
+		<%= render 'shared/error_messages', object: f.object %>
+		Passenger<br>
+		<%= passenger_form.label :name %>
+		<%= passenger_form.text_field :name, placeholder: 'Name' %><br>
 
-		<%= f.fields_for :passengers do |passenger_form| %>
-			Passenger<br>
-			<%= passenger_form.label :name %>
-			<%= passenger_form.text_field :name, placeholder: 'Name' %><br>
-
-			<%= passenger_form.label :email %>
-			<%= passenger_form.text_field :email, placeholder: 'Email' %><br>
-		<% end %>
+		<%= passenger_form.label :email %>
+		<%= passenger_form.text_field :email, placeholder: 'Email' %><br>
+	<% end %>
 
 	<%= f.hidden_field :flight_id, value: @flight.id %>
 	<%= f.submit 'Submit' %>
